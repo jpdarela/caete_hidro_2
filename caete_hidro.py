@@ -78,7 +78,9 @@ def save_nc(fname, arr, varname):
     var_ = rootgrp.createVariable(varname=varname,
                                   datatype=np.float32,
                                   dimensions=("latitude", "longitude",),
-                                  fill_value=-9999.0)
+                                  fill_value=-9999.0,
+                                  zlib=True,
+                                  least_significant_digit=4)
 
     # attributes
     # rootgrp
@@ -101,7 +103,8 @@ def save_nc(fname, arr, varname):
     var_.long_name = varname
     var_.units = '%'
     var_.standard_name = varname
-    var_.missing_value = -9999.0
+    var_.missing_value = -1.0
+    var_.no_data = -1.0
 
     # WRITING DATA
     longitude[:] = lon
