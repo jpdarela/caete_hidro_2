@@ -78,10 +78,9 @@ def save_nc(fname, arr, varname):
     var_ = rootgrp.createVariable(varname=varname,
                                   datatype=np.float32,
                                   dimensions=("latitude", "longitude",),
-                                  fill_value=-9999.0,
+                                  fill_value=-1,
                                   zlib=True,
                                   least_significant_digit=4)
-
     # attributes
     # rootgrp
     rootgrp.description = 'CAETE_HYDROLOGY'
@@ -110,7 +109,7 @@ def save_nc(fname, arr, varname):
     longitude[:] = lon
     latitude[:] = lat
 
-    var_[:, :] = np.flipud(arr)
+    var_[:, :] = arr
     rootgrp.close()
 
 
